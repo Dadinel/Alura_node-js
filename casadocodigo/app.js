@@ -1,12 +1,6 @@
-var express = require('express');
-var app = express();
-
-app.set('view engine', 'ejs');
-
-app.get('/produtos', function(req, res){
-    //res.send("<html><body>Listagem de Produtos </body></html>");
-    res.render('produtos/lista');
-});
+//var configura = require ('./config/express');
+let app = require ('./config/express')();
+let rotasProdutos = require('./app/routes/produtos')(app);
 
 app.listen(3000, function(){
     console.log("Servidor rodando");
