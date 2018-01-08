@@ -1,11 +1,11 @@
 module.exports = function(app) {
     app.get('/produtos', function(req, res){
         //res.send("<html><body>Listagem de Produtos </body></html>");
-        /*let mysql = require('mysql');
+        let mysql = require('mysql');
         let connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '',
+            password: '1234',
             database: 'casadocodigo_nodejs'
         });
 
@@ -18,8 +18,8 @@ module.exports = function(app) {
             }
         });
 
-        connection.end();*/
+        connection.end();
 
-        res.render('produtos/lista');
+        //res.render('produtos/lista');
     });
 }

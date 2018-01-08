@@ -1,0 +1,4 @@
+[{"id":73, "titulo":"Comecando com nodejs", "descricao":"livro sobre nodejs", "preco":40.0},
+ {"id":74, "titulo":"Comecando com javascript", "descricao":"livro sobre javascript", "preco":40.0},
+ {"id":75, "titulo":"Comecando com express", "descricao":"livro sobre express", "preco":40.0},
+ {"id":76, "titulo":"Indo alem com javascript", "descricao":"javascript avancado", "preco":39.9}]
