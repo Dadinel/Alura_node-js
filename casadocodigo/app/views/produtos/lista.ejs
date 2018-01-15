@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Produtos</title>
     </head>
     <body>
@@ -7,11 +8,17 @@
             <tr>
                 <td>Id</td>
                 <td>Nome</td>
+                <td>Descrição</td>
+                <td>Preço</td>
             </tr>
-            <tr>
-                <td>01</td>
-                <td>Node.js e Express</td>
-            </tr>
+            <% for(let i=0; i<lista.length; i++) {%>
+                <tr>
+                    <td><%= lista[i].id %></td>
+                    <td><%= lista[i].titulo %></td>
+                    <td><%= lista[i].preco %></td>
+                    <td><%= lista[i].descricao%></td>
+                </tr>
+            <% } %>
         </table>
     </body>
 </html>

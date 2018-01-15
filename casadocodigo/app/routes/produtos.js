@@ -1,20 +1,20 @@
+//let connectionFactory = require('../infra/connectionFactory');
+
 module.exports = function(app) {
     app.get('/produtos', function(req, res){
         //res.send("<html><body>Listagem de Produtos </body></html>");
-        let mysql = require('mysql');
-        let connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '1234',
-            database: 'casadocodigo_nodejs'
-        });
+        //let connection = connectionFactory();
+        let connection = app.infra.connectionFactory();
+        var produtosBanco = app.infra.produtosBanco(connection);
 
-        connection.query('select * from livros', function(err, result) {
+        //connection.query('select * from produtos', function(err, results) {
+        produtosBanco.lista( function(err, results) {
             if(err) {
                 console.log(err);
             }
             else {
-                res.send(result);
+                //res.send(result);
+                res.render('produtos/lista', {lista: results});
             }
         });
 
