@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastro de produtos</title>
+    </head>
+    <body>
+        <form action="/produtos" method="post">
+            <div>
+                <label for="titulo">Titulo</label>
+                <input type="text" id="titulo" name="titulo" placeholder="Coloque o título"/>
+            </div>
+            <div>
+                <label for="preco">Preço</label>
+                <input type="text" id="preco" name="preco" placeholder="150.25"/>
+            </div>
+            <div>
+                <label for="descricao">Descrição</label>
+                <textarea cols="20" rows="10" type="text" id="descricao" name="descricao" placeholder="Fale sobre o título"></textarea>
+            </div>
+            <input type="submit" value="Gravar"/>
+        </form>
+    </body>
+</html>
