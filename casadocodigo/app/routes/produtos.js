@@ -50,13 +50,39 @@ module.exports = function(app) {
     });*/
 
     app.get('/produtos/form', function(req, res) {
-        res.render('produtos/form');
+        res.render('produtos/form',{errosValidacao:null,produto:{}});
     });
 
     app.post('/produtos', function(req, res) {
         let connection = app.infra.connectionFactory();
         let produtosDAO = new app.infra.ProdutosDAO(connection);
         let produto = req.body;
+
+        //let validadorTitulo = req.assert('titulo', 'Título é obrigatório');
+        //validadorTitulo.notEmpty();
+
+        req.assert('titulo', 'Título é obrigatório').notEmpty();
+        req.assert('preco', 'Formato inválido').isFloat();
+
+        let erros = req.validationErrors();
+
+        if(erros) {
+            res.format({
+                html: function() {
+                    //res.send(result);
+                    res.status(400).render('produtos/form',{errosValidacao:erros,produto:produto});
+                },
+                json: function() {
+                    res.status(400).json(erros);
+                },
+                default: function() {
+                    res.status(400).send(erros);
+                }
+            });
+
+            console.log(erros);
+            return;
+        }
 
         produtosDAO.salva(produto, function(err, res) {
             if(err) {
@@ -82,7 +108,7 @@ module.exports = function(app) {
         });
 
         connection.end();
-        res.render('produtos/form');
+        res.render('produtos/form',{errosValidacao:null,produto:{}});
     });
 
     //Param
@@ -99,7 +125,7 @@ module.exports = function(app) {
         });
 
         connection.end();
-        res.render('produtos/form');
+        res.render('produtos/form',{errosValidacao:null,produto:{}});
     });
 }
 
@@ -114,5 +140,5 @@ module.exports = function(app) {
     });
 
     connection.end();
-    res.render('produtos/form');
+    res.render('produtos/form',{errosValidacao:null,produto:{}});
 }*/
