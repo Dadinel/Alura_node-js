@@ -80,7 +80,7 @@ module.exports = function(app) {
                 }
             });
 
-            console.log(erros);
+            //console.log(erros);
             return;
         }
 
