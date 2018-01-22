@@ -5,6 +5,17 @@ let express = require('../config/express')();
 let request = require('supertest')(express);
 
 describe('ProdutosController', function() {
+
+    beforeEach(function(done) {
+        //node-database-cleaner
+        let conn = express.infra.connectionFactory();
+        conn.query("delete from produtos", function(ex, result) {
+            if(!ex) {
+                done();
+            }
+        });
+    });
+
     it('#Listagem de produtos JSON', function(done) {
         /*let configuracoes = {
             hostname: 'localhost',
@@ -34,15 +45,15 @@ describe('ProdutosController', function() {
         .expect(200,done);
     });
 
+    it('#Cadastro de produto válido', function(done) {
+        request.post('/produtos')
+        .send({titulo:"Test-Automatic",descricao:"Test-Automatic",preco:100})
+        .expect(302,done);
+    });
+
     it('#Cadastro de produto inválido', function(done) {
         request.post('/produtos')
         .send({titulo:"",descricao:"Novo livro"})
         .expect(400,done);
     });
-
-    /*it('#Cadastro de produto válido', function(done) {
-        request.post('/produtos')
-        .send({titulo:"Test-Automatic",descricao:"Test-Automatic",preco:100})
-        .expect(302,done);
-    });*/
 });

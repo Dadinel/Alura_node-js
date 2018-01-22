@@ -7,10 +7,12 @@ module.exports = function(app) {
         let connection = app.infra.connectionFactory();
         let produtosDAO = new app.infra.ProdutosDAO(connection);
 
-        //connection.query('select * from produtos', function(err, results) {
-        produtosDAO.lista( function(err, results) {
-            if(err) {
-                console.log(err);
+        //connection.query('select * from produtos', function(errors, results) {
+        produtosDAO.lista( function(errors, results, next) {
+            if(errors) {
+                return next(erros);
+                //console.log(errors);
+                //throw new Error(errors);
             }
             else {
                 res.format({
