@@ -39,5 +39,8 @@ module.exports = function() {
         next(error);
     });
 
+    //tem que colocar na ordem, caso contrário ele passa pelo middleware e 
+    //ainda não vai ter acontecido nenhum erro.
+
     return app;
 }
