@@ -13,7 +13,8 @@ module.exports = function() {
     app.set('view engine', 'ejs');
     app.set('views', './app/views');
 
-    //MiddleWare
+    //MiddleWares
+    //Requisição para o express -> function -> function -> function -> ... -> rota
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(expressValidator());
@@ -21,6 +22,22 @@ module.exports = function() {
     load('routes', {cwd: 'app'})
         .then('infra')
         .into(app);
+
+    //Tratativa de endereços inválidos
+    app.use(function(req, res, next) {
+        res.status(404).render('erros/404');
+        next();
+    });
+
+    //Tratativa de erros no servidor
+    app.use(function(error, req, res, next) {
+        if(process.env.NODE_ENV == 'production') {
+            res.status(500).render('erros/500');
+            return;
+        }
+
+        next(error);
+    });
 
     return app;
 }
